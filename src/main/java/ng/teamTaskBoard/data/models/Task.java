@@ -16,11 +16,11 @@ public class Task {
 
     @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String title;
-    int teamId;
-    LocalDateTime dueDate;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    private int id;
+    private String title;
+    private int teamId;
+    private LocalDateTime dueDate;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
 }

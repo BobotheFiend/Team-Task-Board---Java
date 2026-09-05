@@ -15,10 +15,10 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String email;
-    String name;
-    String password;
-    Role role;
-    boolean isActive;
+    private int id;
+    private String email;
+    private String name;
+    private String password;
+    private Role role;
+    private boolean isActive;
 }

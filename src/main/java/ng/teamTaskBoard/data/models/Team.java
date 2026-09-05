@@ -14,10 +14,10 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String name;
-    int memberId;
-    String memberEmail;
-    Member leaderId;
+    private int id;
+    private String name;
+    private int memberId;
+    private String memberEmail;
+    private Member leaderId;
 
 }

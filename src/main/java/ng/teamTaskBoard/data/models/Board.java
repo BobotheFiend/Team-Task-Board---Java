@@ -15,9 +15,9 @@ import java.util.List;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    List<Task> taskId;
-    List<Todo> todoId;
-    int memberId;
-    String email;
+    private int id;
+    private List<Task> taskId;
+    private  List<Todo> todoId;
+    private int memberId;
+    private String email;
 }
