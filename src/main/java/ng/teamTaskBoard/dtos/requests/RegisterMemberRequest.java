@@ -4,7 +4,7 @@ import lombok.Data;
 import ng.teamTaskBoard.data.models.enums.Role;
 
 @Data
-public class RegisteremberRequest {
+public class RegisterMemberRequest {
 
     private String email;
     private String name;

@@ -3,7 +3,7 @@ package ng.teamTaskBoard.services;
 import ng.teamTaskBoard.data.models.Member;
 import ng.teamTaskBoard.data.models.enums.Role;
 import ng.teamTaskBoard.data.repositories.MemberRepository;
-import ng.teamTaskBoard.dtos.requests.RegisteremberRequest;
+import ng.teamTaskBoard.dtos.requests.RegisterMemberRequest;
 import ng.teamTaskBoard.dtos.responses.RegisterMemberResponse;
 import ng.teamTaskBoard.exceptions.MemberAlreadyExistsException;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class AuthService {
         this.memberRepository = memberRepository;
     }
 
-    public RegisterMemberResponse register(RegisteremberRequest request) {
+    public RegisterMemberResponse register(RegisterMemberRequest request) {
         Optional<Member> existingMember = memberRepository.findByEmail(request.getEmail());
 
         if (existingMember.isPresent()) {
