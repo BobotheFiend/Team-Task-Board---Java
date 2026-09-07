@@ -1,9 +1,6 @@
 package ng.teamTaskBoard.data.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -16,6 +13,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     private int memberId;
     private String memberEmail;
     private Member leaderId;
