@@ -34,7 +34,7 @@ public class TaskService {
         this.memberRepository = memberRepository;
     }
 
-    public Task createTask(CreateTaskRequest request, int currentUserId) {
+    public Task createTask(CreateTaskRequest request, Long currentUserId) {
 
         Member currentUser = memberRepository.findById(currentUserId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -43,12 +43,12 @@ public class TaskService {
             throw new RuntimeException("User must be logged in");
         }
 
-        int teamId = Integer.parseInt(request.getTeamId());
+        long teamId = Long.parseLong(request.getTeamId());
 
         Team team = teamRepository.findById(teamId)
                 .orElseThrow(() -> new RuntimeException("Team not found"));
 
-        if (team.getLeaderId().getId() != currentUserId) {
+        if (team.getLeaderId() != currentUserId) {
             throw new RuntimeException("Only the team leader can create a task");
         }
 

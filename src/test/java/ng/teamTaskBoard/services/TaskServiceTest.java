@@ -70,8 +70,7 @@ class TaskServiceTest {
         team.setId(10);
         team.setName("Development Team");
 
-        // Your current Team class uses leaderId and memberId
-        team.setLeaderId(leader);
+        team.setLeaderId(leader.getId());
         team.setMemberId(normalMember.getId());
     }
 
@@ -82,12 +81,12 @@ class TaskServiceTest {
         request.setTaskTitle("Build Login Page");
         request.setTeamId("10");
 
-        when(memberRepository.findById(99))
+        when(memberRepository.findById(99L))
                 .thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(
                 RuntimeException.class,
-                () -> taskService.createTask(request, 99)
+                () -> taskService.createTask(request, 99L)
         );
 
         assertEquals("User not found", exception.getMessage());
@@ -108,12 +107,12 @@ class TaskServiceTest {
         request.setTaskTitle("Build Login Page");
         request.setTeamId("10");
 
-        when(memberRepository.findById(3))
+        when(memberRepository.findById(3L))
                 .thenReturn(Optional.of(inactiveMember));
 
         RuntimeException exception = assertThrows(
                 RuntimeException.class,
-                () -> taskService.createTask(request, 3)
+                () -> taskService.createTask(request, 3L)
         );
 
         assertEquals("User must be logged in", exception.getMessage());
@@ -129,15 +128,15 @@ class TaskServiceTest {
         request.setTaskTitle("Build Login Page");
         request.setTeamId("10");
 
-        when(memberRepository.findById(1))
+        when(memberRepository.findById(1L))
                 .thenReturn(Optional.of(leader));
 
-        when(teamRepository.findById(10))
+        when(teamRepository.findById(10L))
                 .thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(
                 RuntimeException.class,
-                () -> taskService.createTask(request, 1)
+                () -> taskService.createTask(request, 1L)
         );
 
         assertEquals("Team not found", exception.getMessage());
@@ -152,15 +151,15 @@ class TaskServiceTest {
         request.setTaskTitle("Build Login Page");
         request.setTeamId("10");
 
-        when(memberRepository.findById(2))
+        when(memberRepository.findById(2L))
                 .thenReturn(Optional.of(normalMember));
 
-        when(teamRepository.findById(10))
+        when(teamRepository.findById(10L))
                 .thenReturn(Optional.of(team));
 
         RuntimeException exception = assertThrows(
                 RuntimeException.class,
-                () -> taskService.createTask(request, 2)
+                () -> taskService.createTask(request, 2L)
         );
 
         assertEquals(
@@ -178,10 +177,10 @@ class TaskServiceTest {
         request.setTaskTitle("Build Login Page");
         request.setTeamId("10");
 
-        when(memberRepository.findById(1))
+        when(memberRepository.findById(1L))
                 .thenReturn(Optional.of(leader));
 
-        when(teamRepository.findById(10))
+        when(teamRepository.findById(10L))
                 .thenReturn(Optional.of(team));
 
         when(taskRepository.existsByTitle("Build Login Page"))
@@ -189,7 +188,7 @@ class TaskServiceTest {
 
         RuntimeException exception = assertThrows(
                 RuntimeException.class,
-                () -> taskService.createTask(request, 1)
+                () -> taskService.createTask(request, 1L)
         );
 
         assertEquals(
@@ -224,10 +223,10 @@ class TaskServiceTest {
         savedTask.setTeamId(10);
         savedTask.setDueDate(dueDate);
 
-        when(memberRepository.findById(1))
+        when(memberRepository.findById(1L))
                 .thenReturn(Optional.of(leader));
 
-        when(teamRepository.findById(10))
+        when(teamRepository.findById(10L))
                 .thenReturn(Optional.of(team));
 
         when(taskRepository.existsByTitle("Build Login Page"))
@@ -236,7 +235,7 @@ class TaskServiceTest {
         when(taskRepository.save(any(Task.class)))
                 .thenReturn(savedTask);
 
-        Task result = taskService.createTask(request, 1);
+        Task result = taskService.createTask(request, 1L);
 
         assertNotNull(result);
         assertEquals(100, result.getId());
@@ -268,10 +267,10 @@ class TaskServiceTest {
         savedTask.setTitle("Build Dashboard");
         savedTask.setTeamId(10);
 
-        when(memberRepository.findById(1))
+        when(memberRepository.findById(1L))
                 .thenReturn(Optional.of(leader));
 
-        when(teamRepository.findById(10))
+        when(teamRepository.findById(10L))
                 .thenReturn(Optional.of(team));
 
         when(taskRepository.existsByTitle("Build Dashboard"))
@@ -280,10 +279,10 @@ class TaskServiceTest {
         when(taskRepository.save(any(Task.class)))
                 .thenReturn(savedTask);
 
-        when(memberRepository.findById(2))
+        when(memberRepository.findById(2L))
                 .thenReturn(Optional.of(normalMember));
 
-        taskService.createTask(request, 1);
+        taskService.createTask(request, 1L);
 
         ArgumentCaptor<Todo> todoCaptor =
                 ArgumentCaptor.forClass(Todo.class);
@@ -314,10 +313,10 @@ class TaskServiceTest {
         Task savedTask = new Task();
         savedTask.setId(100);
 
-        when(memberRepository.findById(1))
+        when(memberRepository.findById(1L))
                 .thenReturn(Optional.of(leader));
 
-        when(teamRepository.findById(10))
+        when(teamRepository.findById(10L))
                 .thenReturn(Optional.of(team));
 
         when(taskRepository.existsByTitle("Build Dashboard"))
@@ -326,12 +325,12 @@ class TaskServiceTest {
         when(taskRepository.save(any(Task.class)))
                 .thenReturn(savedTask);
 
-        when(memberRepository.findById(99))
+        when(memberRepository.findById(99L))
                 .thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(
                 RuntimeException.class,
-                () -> taskService.createTask(request, 1)
+                () -> taskService.createTask(request, 1L)
         );
 
         assertEquals(
@@ -362,10 +361,10 @@ class TaskServiceTest {
         Task savedTask = new Task();
         savedTask.setId(100);
 
-        when(memberRepository.findById(1))
+        when(memberRepository.findById(1L))
                 .thenReturn(Optional.of(leader));
 
-        when(teamRepository.findById(10))
+        when(teamRepository.findById(10L))
                 .thenReturn(Optional.of(team));
 
         when(taskRepository.existsByTitle("Build Dashboard"))
@@ -374,12 +373,12 @@ class TaskServiceTest {
         when(taskRepository.save(any(Task.class)))
                 .thenReturn(savedTask);
 
-        when(memberRepository.findById(99))
+        when(memberRepository.findById(99L))
                 .thenReturn(Optional.of(outsideMember));
 
         RuntimeException exception = assertThrows(
                 RuntimeException.class,
-                () -> taskService.createTask(request, 1)
+                () -> taskService.createTask(request, 1L)
         );
 
         assertEquals(
@@ -408,10 +407,10 @@ class TaskServiceTest {
         Task savedTask = new Task();
         savedTask.setId(200);
 
-        when(memberRepository.findById(1))
+        when(memberRepository.findById(1L))
                 .thenReturn(Optional.of(leader));
 
-        when(teamRepository.findById(10))
+        when(teamRepository.findById(10L))
                 .thenReturn(Optional.of(team));
 
         when(taskRepository.existsByTitle("Build API"))
@@ -420,10 +419,10 @@ class TaskServiceTest {
         when(taskRepository.save(any(Task.class)))
                 .thenReturn(savedTask);
 
-        when(memberRepository.findById(2))
+        when(memberRepository.findById(2L))
                 .thenReturn(Optional.of(normalMember));
 
-        taskService.createTask(request, 1);
+        taskService.createTask(request, 1L);
 
         ArgumentCaptor<Todo> todoCaptor =
                 ArgumentCaptor.forClass(Todo.class);
@@ -454,10 +453,10 @@ class TaskServiceTest {
         Task savedTask = new Task();
         savedTask.setId(200);
 
-        when(memberRepository.findById(1))
+        when(memberRepository.findById(1L))
                 .thenReturn(Optional.of(leader));
 
-        when(teamRepository.findById(10))
+        when(teamRepository.findById(10L))
                 .thenReturn(Optional.of(team));
 
         when(taskRepository.existsByTitle("Build API"))
@@ -466,10 +465,10 @@ class TaskServiceTest {
         when(taskRepository.save(any(Task.class)))
                 .thenReturn(savedTask);
 
-        when(memberRepository.findById(2))
+        when(memberRepository.findById(2L))
                 .thenReturn(Optional.of(normalMember));
 
-        taskService.createTask(request, 1);
+        taskService.createTask(request, 1L);
 
         ArgumentCaptor<Todo> todoCaptor =
                 ArgumentCaptor.forClass(Todo.class);
@@ -501,10 +500,10 @@ class TaskServiceTest {
         Task savedTask = new Task();
         savedTask.setId(300);
 
-        when(memberRepository.findById(1))
+        when(memberRepository.findById(1L))
                 .thenReturn(Optional.of(leader));
 
-        when(teamRepository.findById(10))
+        when(teamRepository.findById(10L))
                 .thenReturn(Optional.of(team));
 
         when(taskRepository.existsByTitle("Build Full Application"))
@@ -513,10 +512,10 @@ class TaskServiceTest {
         when(taskRepository.save(any(Task.class)))
                 .thenReturn(savedTask);
 
-        when(memberRepository.findById(2))
+        when(memberRepository.findById(2L))
                 .thenReturn(Optional.of(normalMember));
 
-        taskService.createTask(request, 1);
+        taskService.createTask(request, 1L);
 
         verify(todoRepository, times(2)).save(any(Todo.class));
     }

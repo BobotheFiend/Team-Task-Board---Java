@@ -18,7 +18,7 @@ public class TaskController {
     @PostMapping
     public Task createTask(
             @RequestBody CreateTaskRequest request,
-            @RequestParam int currentUserId
+            @RequestParam Long currentUserId
     ) {
         return taskService.createTask(request, currentUserId);
     }
