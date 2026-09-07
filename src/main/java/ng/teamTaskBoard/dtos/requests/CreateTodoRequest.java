@@ -9,8 +9,8 @@ import java.time.LocalTime;
 @Data
 public class CreateTodoRequest {
 
-    private int taskId;
-    private int memberId;
+    private long taskId;
+    private long memberId;
     private String title;
     private String memberEmail;
     private Priority priority;

@@ -18,13 +18,13 @@ public class Todo {
 
     @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long  id;
+    private long  id;
     private  String title;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int position;
-    private  int memberId;
-    private int taskId;
+    private  long memberId;
+    private long taskId;
     private  Priority priority;
     private Status status =  Status.IN_PROGRESS;
     private LocalDateTime dueDate;
