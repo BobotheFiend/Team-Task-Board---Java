@@ -95,3 +95,4 @@ public class AuthServiceTest {
         assertTrue(existingMember.isActive());
     }
 
+}
