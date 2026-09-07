@@ -11,11 +11,11 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String name;
 
-    private int memberId;
+    private long memberId;
     private String memberEmail;
-    private Member leaderId;
+    private long leaderId;
 
 }
